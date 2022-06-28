@@ -1,7 +1,8 @@
 import longText from "../cmps/long-text.cmp.js";
 import reviewAdd from "../cmps/review-add.cmp.js";
 import { bookService } from "../services/book-service.js";
-import { utilService } from './util-service.js';
+import { utilService } from '../services/util-service.js';
+import { eventBus } from "../services/eventBus-service.js";
 
 export default {
   template: `
@@ -16,8 +17,19 @@ export default {
         <P>- {{ReadigLength}} -</P>
         <P>- {{bookAge}} -</P>
         <long-text :txt="book.description"></long-text>
-        <router-link class="btn" to="/book">Back</router-link>
       </section>
+    
+      <section v-if="book?.reviews" class="review-list">
+        <ul class="clean-list">
+            <li v-for="review in book.reviews" :key="review.id">
+                <pre>{{review}}</pre>
+                <div class="actions">
+                    <button @click="removeReview(review.id)">X</button>
+                </div>
+            </li>
+        </ul>
+    </section>
+
       <review-add @reviewed="saveReview"></review-add>
 `,
   data() {
@@ -41,11 +53,18 @@ export default {
         this.book['reviews'] = []
 
       this.book.reviews.push(review)
-      bookService.addReview(this.book).then(book => {
-        this.$router.push("'/book/'+book.id")
+      bookService.save(this.book).then(book => {
+        // this.$router.push("/book")
         eventBus.emit('show-msg', { txt: 'Saved successfully', type: 'success' });
       })
-    }
+    },
+    removeReview(reviewId) {
+      const idx = this.book.reviews.findIndex(review => review.id === reviewId);
+      this.book.reviews.splice(idx, 1)
+      bookService.save(this.book).then(book => {
+        eventBus.emit('show-msg', { txt: 'Removed successfully', type: 'success' });
+      })
+    },
   },
   computed: {
     bookImgUrl() {
