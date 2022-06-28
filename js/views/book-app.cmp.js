@@ -1,27 +1,26 @@
 import { bookService } from "../services/book-service.js";
 import bookFilter from "../cmps/book-filter.cmp.js";
+import bookAdd from "../cmps/book-add.cmp.js";
 import bookList from "../cmps/book-list.cmp.js";
-// import bookDetails from "../views/book-details.cmp.js";
-
 
 
 export default {
   template: `
   <section class="book-app">
      <book-filter @filtered="setFilter"></book-filter>
-     <book-list :books="booksToShow" @selected="selectBook"></book-list>
-     <!-- <book-details v-if="selectedBook" :book="selectedBook" @close="selectedBook=null"></book-details> -->
+     <!-- <book-add ></book-add> -->
+     <router-view/>
+     <book-list :books="booksToShow"></book-list>
   </section>
 `,
   components: {
     bookList,
-    // bookDetails,
     bookFilter,
+    bookAdd,
   },
   data() {
     return {
       books: null,
-      // selectedBook: null,
       filterBy: null,
     };
   },
@@ -29,9 +28,6 @@ export default {
     bookService.query().then(books => this.books = books)
 },
   methods: {
-    // selectBook(bookId) {
-    //   this.selectedBook = bookService.get(bookId)
-    // },
     setFilter(filter) {
       this.filterBy = filter
     }

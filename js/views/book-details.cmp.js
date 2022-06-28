@@ -7,15 +7,17 @@ import { eventBus } from "../services/eventBus-service.js";
 export default {
   template: `
     <section  v-if="book" class="book-details app-main">
+    <router-link class="btn" :to="'/book/' + nextBookId">Next Book</router-link>
+            <hr />
         <h2>{{book.title}}</h2>
         <img :src="bookImgUrl" alt=""> 
         <h4 :class="priceStyle">Price: {{getPrice}}</h4>
-        <P>Authors: {{book.authors.join(', ')}}</P>
-        <P>Categories: {{book.categories.join(', ')}}</P>
-        <P>Language: {{book.language}}</P>
-        <P>Subtitle: {{book.subtitle}}</P>
-        <P>- {{ReadigLength}} -</P>
-        <P>- {{bookAge}} -</P>
+        <p>Authors: {{book.authors.join(', ')}}</p>
+        <p>Categories: {{book.categories.join(', ')}}</P>
+        <p>Language: {{book.language}}</p>
+        <p>Subtitle: {{book.subtitle}}</p>
+        <p>- {{ReadigLength}} -</p>
+        <p>- {{bookAge}} -</p>
         <long-text :txt="book.description"></long-text>
       </section>
     
@@ -34,12 +36,13 @@ export default {
 `,
   data() {
     return {
-      book: null
+      book: null,
+      nextBookId: null,
     };
   },
   created() {
-    const id = this.$route.params.bookId
-    bookService.get(id).then(book => this.book = book)
+    // const id = this.$route.params.bookId
+    // bookService.get(id).then(book => this.book = book)
   },
   components: {
     longText,
@@ -94,4 +97,18 @@ export default {
       return { red: priceAmount > 150, green: priceAmount < 20 }
     },
   },
-};
+  watch: {
+    '$route.params.bookId': {
+      handler() {
+        const {bookId:id} = this.$route.params
+        if(!id) return
+        bookService.get(id).then(book => {
+            this.book = book
+            bookService.getNextBookId(book.id)
+                .then(nextBookId => this.nextBookId = nextBookId)
+        })
+    },
+    immediate: true
+  }
+}
+}

@@ -9,7 +9,10 @@ export const bookService = {
   remove,
   save,
   get,
-  addReview
+  addReview,
+  getGoogleBooks,
+  addGoogleBook,
+  getNextBookId,
 };
 
 function query() {
@@ -31,6 +34,24 @@ function save(book) {
 
 function addReview(book) {
   return storageService.put(BOOKS_KEY, book)
+}
+
+function getGoogleBooks(key) {
+  return axios.get(`https://www.googleapis.com/books/v1/volumes?printType=books&q=${key}`)
+  .then((res) => res.data)
+
+}
+
+function getNextBookId(bookId) {
+  return storageService.query(BOOKS_KEY)
+      .then(books => {
+          const idx = books.findIndex(book => book.id === bookId)
+          return (idx < books.length-1)? books[idx + 1].id : books[0].id
+      })
+}
+
+function addGoogleBook(book){
+  storageService.post(BOOKS_KEY, book)
 }
 
 function _createBooks() {
