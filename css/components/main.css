@@ -1,0 +1,14 @@
+.main-content {
+    background-color: var(--secondary-color);
+    color: var(--dark-color);
+    margin: 2rem 0.2rem;
+}
+
+.main-content .btn {
+    color: var(--dark-color);
+}
+
+.main-content .btn:hover {
+    border-color: #18978f;
+}
+

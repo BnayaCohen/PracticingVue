@@ -1,0 +1,23 @@
+.app-header {
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+}
+nav{
+    display: flex;
+    gap: 10px;
+  
+}
+
+nav :any-link{
+  text-decoration: none;
+  color: var(--light-color);
+}
+
+nav :any-link:hover{
+transition: .1s;
+color: var(--primary-color);
+}

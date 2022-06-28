@@ -1,0 +1,12 @@
+.book-preview-container{
+    text-align: center;
+    padding:10px;
+    margin:10px;
+    width: 150px;
+    height: 150px;
+    background-color:var(--secondary-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 10px;
+}

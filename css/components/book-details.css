@@ -1,0 +1,27 @@
+.book-details{
+    text-align: center;
+    padding:10px;
+    margin:10px;
+    background-color:var(--secondary-color);
+}
+
+.red{
+    color: red;
+}
+
+.green{
+    color: green;
+}
+
+.review-add{
+    background-color:var(--secondary-color);
+    text-align: center;
+    padding:10px;
+    margin:auto;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    padding: auto;
+    gap: 10px;
+    border-radius: 10px;
+}

@@ -1,0 +1,13 @@
+.book-filter{
+    background-color: var(--secondary-color);
+    padding: 20px;
+    text-align: center;
+    
+}
+
+.book-filter input{
+    border-radius: 5px;
+    padding: 3px 10px;
+    border: none;
+    background-color: rgb(213, 213, 213);
+}

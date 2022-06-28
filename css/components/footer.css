@@ -1,0 +1,8 @@
+.app-footer{
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    top: 80vh;
+}

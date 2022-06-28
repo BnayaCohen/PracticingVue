@@ -1,0 +1,17 @@
+.user-msg{
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    background-color: lightgreen;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.success {
+    background-color: greenyellow;
+}
+
+.error{
+    background-color: red;
+    color: white;
+}

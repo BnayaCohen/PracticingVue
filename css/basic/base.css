@@ -1,0 +1,22 @@
+* {
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+}
+
+html {
+    font-family: 'Arial';
+}
+
+body {
+    background-color: var(--primary-color);
+    margin: 0;
+    text-align: center;
+}
+
+img {
+    width: 150px;
+    object-fit: contain;
+}
